@@ -61,14 +61,14 @@ const Landing = () => {
   };
 
   return (
-    <div className="flex items-center justify-center p-5 ">
+    <div className="flex items-end p-5 bg-[#343541] ">
       <div className="bg-zinc-90 w-[] h-screen">
         <ResponsiveDrawer chats={chats} setChats={setChats} setActiveChatIndex={setActiveChatIndex} />
       </div>
-      <div className="w-[80%]  bg-blac h-auto flex flex-col justify-end items-cente p-10">
-        <div className="chats">
+      <div className="  bg- h-auto flex w-[100%] max-w-[850px] flex-col  p-10">
+        <div className="rounded-lg bg-[#000000] mb-4 text-white px-3">
           {chats[activeChatIndex].messages.map((message, i) => (
-            <div key={i} className="flex space-x-2  py-4 ">
+            <div key={i} className="flex space-x-4  py-4 ">
               <img
                 src={message.isBot ? chatgpt : man}
                 alt="dp"
@@ -79,12 +79,12 @@ const Landing = () => {
           ))}
           <div ref={msgEnd} />
         </div>
-        <div className="chatfooter w-[100%] h-[20%]">
-          <div className=" bg-violet-950 w-[80%] text-white flex p-4 h-[80%] rounded-lg">
+        <div className="chatfooter  ">
+          <div className=" bg-stone-900 text-white w-[100%] flex p-4 rounded-lg">
             <input
               type="text"
               name=""
-              className="bg-violet-950 w-[100%]"
+              className="bg-stone-900 w-[100%]"
               id=""
               placeholder="Send a Message"
               value={input}

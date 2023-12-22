@@ -15,6 +15,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
+import chatgpt from "../assets/chatgpt.svg";
+import EditNoteIcon from "@mui/icons-material/EditNote";
 
 const drawerWidth = 240;
 
@@ -44,8 +46,11 @@ function ResponsiveDrawer(props) {
     setChats((prevChats) => {
       const updatedChats = [...prevChats];
       updatedChats.splice(index, 1);
-      const clampedIndex = Math.min(Math.max(index, 0), updatedChats.length - 1);
-      if (updatedChats.length === 0 ) {
+      const clampedIndex = Math.min(
+        Math.max(index, 0),
+        updatedChats.length - 1
+      );
+      if (updatedChats.length === 0) {
         return [
           {
             messages: [
@@ -66,17 +71,42 @@ function ResponsiveDrawer(props) {
     <div>
       <Toolbar />
       <Divider />
-      <Button variant="contained" onClick={handleCreateChat}>
-        {" "}
-        + New Button
+      <Button
+        variant="contained"
+        sx={{ backgroundColor: "#000000" }}
+        onClick={handleCreateChat}
+        endIcon={<EditNoteIcon sx={{ fontSize: "large" }} />}
+        startIcon={
+          <img src={chatgpt} className="h-[30px] w-[30px] rounded-full mr-1" />
+        }
+      >
+        New Chat
       </Button>
+      <Divider sx={{ backgroundColor: "#ffffff", marginTop: "4px" }} />
       <List>
         {chats.map((chat, index) => (
           <ListItem key={index} disablePadding>
-            <ListItemButton onClick={() => setActiveChatIndex(index)}>
-            <ListItemText primary={chat.messages.length > 1 ? chat.messages[1].text : "New Chat"} />
+            <ListItemButton
+              onClick={() => setActiveChatIndex(index)}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#313436",
+                },
+              }}
+            >
+              <ListItemText
+                primary={
+                  chat.messages.length > 1
+                    ? chat.messages[1].text.length > 50
+                      ? chat.messages[1].text.substring(0, 18) + "..."
+                      : chat.messages[1].text
+                    : "New Chat"
+                }
+                sx={{ color: "#ffffff", fontWeight: "bold" }}
+              />
+
               <IconButton onClick={() => handleDeleteChat(index)}>
-                <DeleteIcon />
+                <DeleteIcon sx={{ fill: "#ffffff" }} />
               </IconButton>
             </ListItemButton>
           </ListItem>
@@ -90,13 +120,16 @@ function ResponsiveDrawer(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", color: "ffffff" }}>
       <CssBaseline />
       <AppBar
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
+          backgroundColor: "#343541",
+          textAlign: "center",
+          alignItems: "center",
         }}
       >
         <Toolbar>
@@ -109,14 +142,18 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" noWrap component="div"  sx={{ fontWeight: 'bold' }}>
             DevGPT
           </Typography>
         </Toolbar>
       </AppBar>
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{
+          width: { sm: drawerWidth },
+          flexShrink: { sm: 0 },
+          backgroundColor: "#000000",
+        }}
         aria-label="mailbox folders"
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -133,6 +170,7 @@ function ResponsiveDrawer(props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              backgroundColor: "#000000",
             },
           }}
         >
@@ -145,6 +183,7 @@ function ResponsiveDrawer(props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              backgroundColor: "#000000",
             },
           }}
           open
