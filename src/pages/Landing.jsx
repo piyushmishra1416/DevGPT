@@ -122,7 +122,9 @@ const Landing = () => {
               {" "}
               <SendRoundedIcon fontSize="large" />
             </button>
+          
           </div>
+          <p className="ml-3">DevGPT may display inaccurate info, including about people, so double-check its responses.</p>
         </div>
       </div>
     </div>
