@@ -16,7 +16,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import chatgpt from "../assets/chatgpt.svg";
-import EditNoteIcon from "@mui/icons-material/EditNote";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const drawerWidth = 240;
 
@@ -75,7 +75,7 @@ function ResponsiveDrawer(props) {
         variant="contained"
         sx={{ backgroundColor: "#000000" }}
         onClick={handleCreateChat}
-        endIcon={<EditNoteIcon sx={{ fontSize: "large" }} />}
+        endIcon={<AddCircleOutlineIcon sx={{ fontSize: "large" }} />}
         startIcon={
           <img src={chatgpt} className="h-[30px] w-[30px] rounded-full mr-1" />
         }

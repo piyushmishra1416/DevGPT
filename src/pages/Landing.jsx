@@ -59,6 +59,19 @@ const Landing = () => {
       await handleSend();
     }
   };
+  useEffect(() => {
+    // Save chats to local storage
+    localStorage.setItem("chats", JSON.stringify(chats));
+  }, [chats]);
+  
+  useEffect(() => {
+    // Load chats from local storage
+    const savedChats = localStorage.getItem("chats");
+    if (savedChats) {
+      setChats(JSON.parse(savedChats));
+    }
+  }, []);
+  
 
   return (
     <div className="flex items-end p-5 bg-[#343541] ">
@@ -68,7 +81,7 @@ const Landing = () => {
       <div className="  bg- h-auto flex w-[100%] max-w-[850px] flex-col  p-10">
         <div className="rounded-lg bg-[#000000] mb-4 text-white px-3">
           {chats[activeChatIndex].messages.map((message, i) => (
-            <div key={i} className="flex space-x-4  py-4 ">
+            <div key={i} className="flex space-x-4 ${message.isBot ? 'bg-[#000000]' : 'bg-[#c75151]'}   py-4 ">
               <img
                 src={message.isBot ? chatgpt : man}
                 alt="dp"
