@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Header } from "../components/Header";
 import { makeApiRequest } from "../Openai";
 import man from "../assets/man.png";
 import chatgpt from "../assets/chatgpt.svg";
@@ -59,29 +58,42 @@ const Landing = () => {
       await handleSend();
     }
   };
+
   useEffect(() => {
-    // Save chats to local storage
-    localStorage.setItem("chats", JSON.stringify(chats));
+    try {
+      localStorage.setItem("chats", JSON.stringify(chats));
+    } catch (error) {
+      console.error("Error saving chats to local storage:", error);
+    }
   }, [chats]);
-  
+
   useEffect(() => {
-    // Load chats from local storage
-    const savedChats = localStorage.getItem("chats");
-    if (savedChats) {
-      setChats(JSON.parse(savedChats));
+    try {
+      const savedChats = localStorage.getItem("chats");
+      if (savedChats) {
+        setChats(JSON.parse(savedChats));
+      }
+    } catch (error) {
+      console.error("Error loading chats from local storage:", error);
     }
   }, []);
-  
 
   return (
-    <div className="flex items-end p-5 bg-[#343541] ">
+    <div className="flex items-end p-5 mt-5 bg-[#343541] ">
       <div className="bg-zinc-90 w-[] h-screen">
-        <ResponsiveDrawer chats={chats} setChats={setChats} setActiveChatIndex={setActiveChatIndex} />
+        <ResponsiveDrawer
+          chats={chats}
+          setChats={setChats}
+          setActiveChatIndex={setActiveChatIndex}
+        />
       </div>
       <div className="  bg- h-auto flex w-[100%] max-w-[850px] flex-col  p-10">
         <div className="rounded-lg bg-[#000000] mb-4 text-white px-3">
-          {chats[activeChatIndex].messages.map((message, i) => (
-            <div key={i} className="flex space-x-4 ${message.isBot ? 'bg-[#000000]' : 'bg-[#c75151]'}   py-4 ">
+          {chats[activeChatIndex]?.messages?.map((message, i) => (
+            <div
+              key={i}
+              className="flex space-x-4 ${message.isBot ? 'bg-[#000000]' : 'bg-[#c75151]'}   py-4 "
+            >
               <img
                 src={message.isBot ? chatgpt : man}
                 alt="dp"
@@ -116,7 +128,5 @@ const Landing = () => {
     </div>
   );
 };
-
-
 
 export default Landing;

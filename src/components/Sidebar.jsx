@@ -40,16 +40,15 @@ function ResponsiveDrawer(props) {
         ],
       },
     ]);
+    setActiveChatIndex(chats.length);
+
   };
 
   const handleDeleteChat = (index) => {
     setChats((prevChats) => {
       const updatedChats = [...prevChats];
+      setActiveChatIndex(chats.length - 1)
       updatedChats.splice(index, 1);
-      const clampedIndex = Math.min(
-        Math.max(index, 0),
-        updatedChats.length - 1
-      );
       if (updatedChats.length === 0) {
         return [
           {
