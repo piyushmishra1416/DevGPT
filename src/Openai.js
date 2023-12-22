@@ -1,4 +1,4 @@
-// utils/apiUtils.js
+
 const apiUrl = 'https://api-v2.longshot.ai/custom/api/generate/instruct';
 
 export const makeApiRequest = async (text, token) => {
@@ -20,6 +20,6 @@ export const makeApiRequest = async (text, token) => {
     return responseData;
   } catch (error) {
     console.error('Error making API request:', error);
-    throw error; // Rethrow the error to handle it elsewhere
+    throw error;
   }
 };

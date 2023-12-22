@@ -20,7 +20,7 @@ const Landing = () => {
       ],
     },
   ]);
-  const token = "a28d1fb0c93613d4e00160aeedb47542a9a0e16f";
+  const token = "ea27f1b64c148e10d9aaba69170bd5566abe4931";
   useEffect(() => {
     msgEnd.current.scrollIntoView();
   }, []);
